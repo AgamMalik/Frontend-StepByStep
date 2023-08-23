@@ -28,7 +28,7 @@
 
 7. export store
 
-8. create actions and reducers folders in store
+8. create actions and reducers folders in store folder
 
 9. create a new file "authReducer.js" in reducer folder(for holding login and register state and authentication token)
 
