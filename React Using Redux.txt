@@ -1,0 +1,67 @@
+1. Install Dependencies
+	-axios(for making http requests from client side/ to make api calls from client side)
+	-react-router-dom(to create single page applications that our page wont be refreshed)
+	-redux-devtools-extension()
+	-redux-thunk(to make async calls in redux actions)
+	-material ui
+
+2. lets check if react application is working
+
+3. Start react app and remove unnecessary files and folders
+
+4. Configure Redux Store
+	-create a new folder(store)...> new file store.js in src
+	-in beginning we will just configure necessary tools
+		-import composeWithDevTools from redux-devtools-extension
+		-import combineReducers, createStore, applyMiddleware from redux
+		-import thunk from redux-thunk
+
+5. create a root reducer in store.js
+	-const rootReducer = combineReducers({});
+
+
+6. create store 
+	-const store = createStore(
+  	 rootReducer,
+  	 composeWithDevTools(applyMiddleware(thunk))
+	 );
+
+7. export store
+
+8. create actions and reducers folder in store
+
+9. create a new file "authReducer.js" in reducer folder(for holding login and register state and authentication token)
+
+
+10. in authReducer.js
+	-create the intialstate(userDetails : null at the beginning when we start our application)
+		-const initState = {
+ 		   userDetails: null,
+		 };
+
+	-create first reducer
+		-const reducer = (state = initState, action) => {
+   		 switch (action.type) {
+    		     case "DUMMY":
+            
+       		      return {
+       		          // returns the previous state
+       		          ...state
+       		      };
+    
+       		  default:
+      		      return state;
+		     }
+		 }
+
+11. Now for every reducer ..create an action file.
+	-authActions.js in actions folder
+		-create a variable(autActions)...will define it later..
+
+12. Import reducer from authReducer in store.js	
+	-now access the properties of authreducer in rootReducer.
+		-const rootReducer = combineReducers({
+		    auth: authReducer,
+		 });
+
+13. Now check the app if it is working or not.
