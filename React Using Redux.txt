@@ -158,3 +158,146 @@
 
 21.use this AuthBox in login and register
 	-import AuthBox in both files
+
+22. create a file named LoginPageHeader.js in LoginPage folder.
+	-create a functional component in it.
+	-import Tpography from material ui.(allow us to render a different component)
+		-import React from "react";
+		 import { Typography } from "@mui/material";
+
+		 const LoginPageHeader = () => {
+ 		 return (
+   		 	<>
+     		 	<Typography variant="h5" sx={{ color: "white" }}>
+       			 Welcome Back!
+     			 </Typography>
+     			 <Typography sx={{color: "#b9bbbe"}}>We are happy that you are with us!</Typography>
+   			 </>
+ 			 );
+			 };
+			export default LoginPageHeader;
+
+23. now import LoginPageHeader in LoginPage.js as pass a a child in AuthBox component.
+
+24. create an input form for login.
+	-create a file name LoginPageInput.js in LoginPage folder.
+	-noe import it in LoginPage.js and use it after header component.
+	-create the input component as a shared component in shared>components folder..because we will be using it at multiple places.(InputLabel.js)
+
+	-in InputLabel.js... import styled from mui/system
+		-create a wrapper for the input and the label
+		-create styled component for input and label
+
+		-in InputLabel function...
+			-destructure props..(const {value, setValue, label, type, placeholder} = props)
+			-create handleVlaueChange function
+
+			-return <Wrapper>
+       				 <Label>{label}</Label>
+       					 <Input 
+       					 value={value}
+       					 onChange={handleValueChange}
+       					 type={type}
+       					 placeholder={placeholder}/>
+    				</Wrapper>
+
+25. use InputLabel in LoginPageInput.js
+	-pass the props
+		-return <>
+ 		 <InputLabel 
+ 		 value
+ 		 setValue
+ 		 label="E-mail"
+ 		 type="text"
+ 		 placeholder="Enter e-mail address" />
+ 		 </>
+	-value and setValue will be coming from the LoginPage.js
+
+26. in LoginPage
+	-const [mail, setMail] = useState('')
+ 	 const[password, setPassword] =useState('')
+
+	-pass all these props to <LoginPageInput/>
+		-<LoginPageInput
+       		  mail={mail}
+      		  setMail={setMail}
+        	  password={password}
+        	  setPassword={setPassword}
+      		  />
+
+27. get these props in LoginPageInput in props by detsructuring
+	-const LoginPageInput = ({mail, setMail, password, setPassword}) => {
+ 	 return (
+   	 <>
+     	 <InputLabel
+       	 value={mail}
+       	 setValue={setMail}
+       	 label="E-mail"
+       	 type="text"
+       	 placeholder="Enter e-mail address"
+     	 />
+     	 <InputLabel
+       	 value={password}
+       	 setValue={setPassword}
+       	 label="Password"
+       	 type="password"
+       	 placeholder="Enter password"
+     	 />
+   	 </>
+ 	 );
+	 }
+
+28. create custom button to login/submit form
+	-create a LoginPageFooter.js in LoginPage folder
+		-we will be getting values(handleLogin, isFormValid) from the props.(only when the form is valid..will be able to press the button).
+		-create ab button to login(we will create it in shared component(CustomPrimaryButton.js))
+
+29. create CustomPrimaryButton.js in shared>components folder
+	-import button from material ui...and we can configure it using typography
+	-we will be getting some properties from the props{label,additionalStyles,disabled,onClick,}
+	-const CustomPrimaryButton = ({
+ 	 label,
+ 	 additionalStyles,
+ 	 disabled,
+ 	 onClick,
+	}) => {
+ 	 return (
+   	 <Button
+     	 variant="contained"
+     	 sx={{
+      	   bgcolor: "#5865F2",
+      	   color: "white",
+      	   textTransform: "none",
+      	   fontSize: "16px",
+      	   fontWeight: 500,
+     	   width: "100%",
+     	   height: "40px",
+     	 }}
+     	 style={additionalStyles ? additionalStyles: {}}
+     	 disabled={disabled}
+    	  onClick={onClick}
+   	 >
+   	   {label}
+   	 </Button>
+  	);
+	};
+30. use CustomPrimaryButton in LoginPageFooter.js
+	-pass props in it
+		-const LoginPageFooter = ({ handleLogin, isFormValid }) => {
+		  return (
+  		  <div>
+   		   <CustomPrimaryButton
+  		      label="Log in"
+   		     additionalStyles={{ marginTop: "30px" }}
+  		      disabled={!isFormValid}
+  		      onClick={handleLogin}
+  		    />
+  		  </div>
+  		);
+		};
+
+31. use LoginPageFooter.js in LoginPage.js and pass some props in it.
+	-<LoginPageFooter isFormValid={isFormValid} handleLogin={handleLogin}/>
+
+	-create useState for isFormValid and pass initial state to be false
+	-create handleLogin function
