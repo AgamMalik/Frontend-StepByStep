@@ -401,3 +401,9 @@
 		  },[mail, password, setIsFromValid])
 		-create validateLoginForm function in shared folder
 			-first create a folder(utils).. then in utils create a file validators.js
+
+35. create Register page
+	-typography...
+	-import useState
+
+36. create a new file RegisterPageInputs.js in RegisterPage folder
