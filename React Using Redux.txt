@@ -448,5 +448,16 @@
 
 ..................FLOW...................
 
->LoginPage: when someone press the button--> control goes to handleLogin-->in handlelogin login function will get executed where we will be passing userdetails and history object(this login function is coming from the props)(it is coming from the props because we are mapping all of their authactions using connect function)-->afterexecuting login function, it will go to the authActions.js-->geActions()will be executed/dispatched-->here it will be receiving the userdetails and navigate object --> it will dispatch that login action-->then we will be executing our async call to api-->if no error then we will get userdetails from response.data-->and we will set that to local storage-->now we will dispatch setuserdetails(object of the type of actions we will dispatch)-->in reducer that action will be found and new state will be set.
+>LoginPage: 
+when someone presses the button--> control goes to handleLogin
+-->in handlelogin login function will get executed where we will be passing userdetails and history object(this login function is coming from the props)(it is coming from the props because we are mapping all of their authactions using connect function)
+-->afterexecuting login function, it will go to the authActions.js
+-->geActions()will be executed/dispatched
+-->here it will be receiving the userdetails and navigate object 
+--> it will dispatch that login action
+-->then we will be executing our async call to api
+-->if no error then we will get userdetails from response.data
+-->and we will set that to local storage
+-->now we will dispatch setuserdetails(object of the type of actions we will dispatch)
+-->in reducer that action will be found and new state will be set.
 
