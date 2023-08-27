@@ -329,3 +329,75 @@
 
 	-create useState for isFormValid and pass initial state to be false
 	-create handleLogin function
+
+32. create caption at the bottom of button
+	-craete a new file RedirectInfo.js in shared>components
+		-import React from "react";
+		 import { Typography } from "@mui/material";
+		 import { styled } from "@mui/system";
+
+		 const RedirectText = styled("span")({
+ 		 color: "#00AFF4",
+ 		 fontWeight: 500,
+ 		 cursor: "pointer",
+			});
+
+		const RedirectInfo = ({
+ 		 text,
+ 		 redirectText,
+ 		 additionalStyles,
+ 		 redirectHandler,
+		}) => {
+		  return (
+ 		   <Typography
+  		    sx={{ color: "#72767d" }}
+  		    style={additionalStyles ? additionalStyles : {}}
+  		    variant="subtitles2"
+  		  >
+  		    {text}
+  		    <RedirectText onClick={redirectHandler}>{redirectText}</RedirectText>
+  		  </Typography>
+ 		 );
+		 };
+		 export default RedirectInfo;
+
+	-use it in LoginPageFooter
+		<RedirectInfo 
+		        text="Need an account?"
+		        redirectText="Create an account"
+		        additionalStyles={{marginTop: "5px"}}
+		        redirectHandler={handlePushToRegisterPage} 
+		/>
+
+		-use useNavigate() hook to create handlePushToRegisterPage function.
+			const LoginPageFooter = ({ handleLogin, isFormValid }) => {
+			  const navigate = useNavigate();
+
+			  const handlePushToRegisterPage = () => {
+			    navigate("/register");
+			  };
+
+33. create tooltip message when mouseover
+	-import tooltip from mui in LoginPageFooter and wrap customprimarybutton in it.
+	-tooltip only contains html elements as its child...so ...> div
+
+	<Tooltip 
+      title={!isFormValid ? getFormNotValidMessage() : getFormValidMessage()}> //create these functions
+        <div>
+          <CustomPrimaryButton
+            label="Log in"
+            additionalStyles={{ marginTop: "30px" }}
+            disabled={!isFormValid}
+            onClick={handleLogin}
+          />
+        </div>
+
+
+
+34. create validation for the login page(when password or mail change..validate the value)
+	-use useEffect hook in LoginPage.js
+		useEffect(() => {
+		    setIsFromValid(validateLoginForm({mail, password}))
+		  },[mail, password, setIsFromValid])
+		-create validateLoginForm function in shared folder
+			-first create a folder(utils).. then in utils create a file validators.js
