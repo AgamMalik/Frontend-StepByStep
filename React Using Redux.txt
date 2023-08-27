@@ -418,3 +418,35 @@
 
 39. create a validateRegisterForm() function in validators.js
   -import validateRegisterForm in RegisterPage.js
+
+
+40. NOW WRITE LOGIC TO COMMUNICATE WITH API
+	(in src folder create a new file(api.js))
+
+41 in api.js
+	-import axios
+	-setup this file
+
+42. in authActions.js file (store > actions)
+	-import everything as api from api.js
+
+	-define redux actions
+	-create a function to receive dispatch(will return an object with functions with our actions)
+		-login action(if you disppatch this action-->will dispatch a function of name login)
+		-register action
+			export const getActions = (dispatch) => {
+				  return {
+				    login: (userDetails, history) => dispatch(login(userDetails, history)),
+				    register: (userDetails, history) =>
+				      dispatch(register(userDetails, history)),
+				  };
+
+	
+			};
+
+	-now define login and register function and create functionality
+
+..................FLOW...................
+
+>LoginPage: when someone press the button--> control goes to handleLogin-->in handlelogin login function will get executed where we will be passing userdetails and history object(this login function is coming from the props)(it is coming from the props because we are mapping all of their authactions using connect function)-->afterexecuting login function, it will go to the authActions.js-->geActions()will be executed/dispatched-->here it will be receiving the userdetails and navigate object --> it will dispatch that login action-->then we will be executing our async call to api-->if no error then we will get userdetails from response.data-->and we will set that to local storage-->now we will dispatch setuserdetails(object of the type of actions we will dispatch)-->in reducer that action will be found and new state will be set.
+
