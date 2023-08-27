@@ -407,3 +407,14 @@
 	-import useState
 
 36. create a new file RegisterPageInputs.js in RegisterPage folder
+	-we will pass some inputs from register page to this page(props)
+		-import RegisterPageInputs in RegisterPage and pass props
+	-use inputlabel.js in RegisterPageInput (already created inputlabel.js for login)
+
+37. create a file RegisterPageFooter.js in RegisterPage folder
+	-do same thing as LoginPageFooter(copy from there)
+
+38. import RegisterPageFooter in RegisterPage and pass props
+
+39. create a validateRegisterForm() function in validators.js
+  -import validateRegisterForm in RegisterPage.js
