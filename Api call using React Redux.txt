@@ -1,0 +1,75 @@
+1. install react-redux @reduxjs/toolkit
+
+2. make a folder(redux) and a file(store.js) in it.
+
+3. in store.js
+	-create a store by using configureStore
+	-give reducer functions in it.
+
+4. create a folder(slice) in redux folder and then create slices according to the requirement(todo.js)
+	- here this will be a todo slice in which we will fetch our todos using api and will render them
+	-in todo.js
+		-createSlice
+			-const todoSlice = createSlice({name: 'todo',});()we can give it a name too
+
+5. in store.js import it and give it to reducer
+
+6. import provider in index.js
+	-we have to provide a store to this provider
+
+now our redux is established..now we are ready to make api calls
+
+7. import createAsyncThunk in todo.js(thunk is a middleware , used to perform delayed task like api call)
+	-create an action named (fetchTodos) ---->(createAsyncThunk(name, callbackfunction))
+	 (when this name action will be dispatched.. this particular callback function will run)
+	-i can do my api calling here
+
+8. now the data should automatically go to store..so we will use extrareducers to dispatch data in store
+	-it has a builder...using this we can listen to the changes to the fetchTodos.
+	-we forgot to create an initial state..first we will do that..the extraReducers..
+		const todoSlice = createSlice({
+		    name: 'todo',
+		    initialState: {
+		        isLoading: false,
+		        data: null,
+		        isError: false,
+		    },
+		    extraReducers: (builder) =>{
+		        builder.addCase(fetchTodos.pending, (state, action) => {
+		            state.isLoading = true;
+		        })
+		        builder.addCase(fetchTodos.fulfilled, (state, action) => {
+		            state.isLoading = false
+		            state.data = action.payload // whatever we return from response.json()....will get it in action.payload
+		        })
+		        builder.addCase(fetchTodos.rejected, (state, action) => {
+		            console.log('Error', action.payload);
+		            state.isError = true
+		        })
+		    },
+		});
+
+
+9. in App.js
+	-create a button(fetch todos by clicking it)
+		-import 2 hooks (useDispatch, useSelector) //dispatch fro dispatching actions...selector to retrieve state from store
+	-we want to disptatch an action(fetchTodos) in fetchtodos button
+	-check it in redux dev tools..
+
+	-now we try to retrieve the data using useSelector() to check what output we are getting
+		-we have a state in it... we just return it as it is
+		-clg it
+		-check it in console
+
+	-lets try to render it on screen now
+
+
+.......SUMMARY...........
+
+when we want to make an api call using redux
+we use createasyncthunk..this thunk creates an action..we can dispatch this action(dispatch(fetchTodos()))
+todos file will fetch todos for us and will put them in state
+and to put them in states ..we use extraReducers..in it we added 3 cases..in them we modified state accordingly..
+after that as soon as it got fulfilled..we set store.data = action.payload
+(whatever we return from response.json()....will get it in action.payload)
+and as soon as our state changes...useSelector hook gets activated and rerender the components
