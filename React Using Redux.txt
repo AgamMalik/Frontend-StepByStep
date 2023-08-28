@@ -461,3 +461,18 @@ when someone presses the button--> control goes to handleLogin
 -->now we will dispatch setuserdetails(object of the type of actions we will dispatch)
 -->in reducer that action will be found and new state will be set.
 
+
+
+43. build component to display error message
+ -shared > components > AlertNotification.js
+ -use it in App.js
+
+44. creater another reducer to manage the state of AlertNotification
+	-in reducer folder > alertReducer.js
+	-we will create initial state for our alert state
+
+45. create alertActions.js in actions folder
+
+46. connect AlertNotification component with the state which we have in alertReducer
+
+47. use alertnotification in authaaction.js
