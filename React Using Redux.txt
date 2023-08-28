@@ -476,3 +476,12 @@ when someone presses the button--> control goes to handleLogin
 46. connect AlertNotification component with the state which we have in alertReducer
 
 47. use alertnotification in authaaction.js
+
+48.  when we make any request from dashboard we need to attach jwt token.
+	-write logic to check response call coming from the server(if 401/403 --> logout)
+
+	-in api.js
+	-add axios interceptors(will be executed before every request)
+	-add secured routes
+
+................DASHBOARD......................
